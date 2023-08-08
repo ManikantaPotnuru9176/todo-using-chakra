@@ -37,12 +37,7 @@ const Todo = () => {
   const [taskText, setTaskText] = useState("");
   const [editing, setEditing] = useState(null);
 
-  const [todos, setTodos] = useState([
-    { id: 1, task: "mani", complete: false },
-    { id: 2, task: "praveen", complete: false },
-    { id: 3, task: "revathi", complete: false },
-    { id: 4, task: "abdhul", complete: false },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const handleAddTodo = (event) => {
     event.preventDefault();
