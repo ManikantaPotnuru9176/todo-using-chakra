@@ -61,7 +61,7 @@ const Todo = () => {
             onTaskTextChange={setTaskText}
             buttonText={editing ? "Update" : "Submit"}
           />
-          {!editing && (
+          {!editing && todos.length !== 0 && (
             <VStack spacing="4" w="40vw" h="60vh">
               {todos.map((todo) => (
                 <TodoItem

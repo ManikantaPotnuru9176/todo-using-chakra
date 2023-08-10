@@ -3,15 +3,17 @@ import { Card, Text, IconButton, HStack, Spacer } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 
 const TodoItem = ({ todo, onEdit, onDelete, onComplete }) => {
+  const { id, task, complete } = todo;
+
   return (
     <Card padding="20px" w="400px">
       <HStack>
         <Text
           w="250px"
-          as={todo.complete ? "s" : ""}
-          onClick={() => onComplete(todo.id)}
+          as={complete ? "s" : "p"}
+          onClick={() => onComplete(id)}
         >
-          {todo.task}
+          {task}
         </Text>
         <Spacer />
         <IconButton
@@ -30,7 +32,7 @@ const TodoItem = ({ todo, onEdit, onDelete, onComplete }) => {
           aria-label="Delete"
           fontSize="20px"
           icon={<DeleteIcon />}
-          onClick={() => onDelete(todo.id)}
+          onClick={() => onDelete(id)}
         />
       </HStack>
     </Card>
