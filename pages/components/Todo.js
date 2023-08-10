@@ -42,6 +42,14 @@ const Todo = () => {
     }
   };
 
+  const handleComplete = (id) => {
+    setTodos((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? { ...todo, complete: !todo.complete } : todo
+      )
+    );
+  };
+
   return (
     <Center h="100vh">
       <Box h="60vh">
@@ -62,6 +70,7 @@ const Todo = () => {
                   todo={todo}
                   onEdit={handleEdit}
                   onDelete={handleDelete}
+                  onComplete={handleComplete}
                 />
               ))}
             </VStack>
