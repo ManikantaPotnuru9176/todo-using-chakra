@@ -8,7 +8,7 @@ const TodoItem = ({ todo, onEdit, onDelete, onComplete }) => {
       <HStack>
         <Text
           w="250px"
-          as={todo.complete ? "s" : "p"}
+        //   as={todo.complete ? "s" : "p"}
           onClick={() => onComplete(todo.id)}
         >
           {todo.task}
