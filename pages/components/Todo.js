@@ -1,8 +1,19 @@
 import React, { useState } from "react";
-import { Heading, Center, VStack, Divider, Box } from "@chakra-ui/react";
+import {
+  Heading,
+  Center,
+  VStack,
+  Divider,
+  Box,
+  Text,
+  IconButton,
+  HStack,
+  Spacer,
+  Card,
+} from "@chakra-ui/react";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { nanoid } from "nanoid";
 import TodoForm from "@/components/TodoForm";
-import TodoItem from "@/components/TodoItem";
 
 const Todo = () => {
   const [taskText, setTaskText] = useState("");
@@ -64,13 +75,36 @@ const Todo = () => {
           {!editing && todos.length !== 0 && (
             <VStack spacing="4" w="40vw" h="60vh">
               {todos.map((todo) => (
-                <TodoItem
-                  key={todo.id}
-                  todo={todo}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                  onComplete={handleComplete}
-                />
+                <Card key={todo.id} padding="20px" w="400px">
+                  <HStack>
+                    <Text
+                      w="250px"
+                      as={todo.complete ? "s" : "p"}
+                      onClick={() => handleComplete(todo.id)}
+                    >
+                      {todo.task}
+                    </Text>
+                    <Spacer />
+                    <IconButton
+                      isRound={true}
+                      variant="solid"
+                      colorScheme="teal"
+                      aria-label="Edit"
+                      fontSize="20px"
+                      icon={<EditIcon />}
+                      onClick={() => handleEdit(todo)}
+                    />
+                    <IconButton
+                      isRound={true}
+                      variant="solid"
+                      colorScheme="red"
+                      aria-label="Delete"
+                      fontSize="20px"
+                      icon={<DeleteIcon />}
+                      onClick={() => handleDelete(todo.id)}
+                    />
+                  </HStack>
+                </Card>
               ))}
             </VStack>
           )}
