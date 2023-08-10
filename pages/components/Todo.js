@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Heading, Center, VStack, Divider, Box } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 import TodoForm from "@/components/TodoForm";
-import TodoItem from "@/components/TodoItem";
+import TodoList from "@/components/TodoList";
 
 const Todo = () => {
   const [taskText, setTaskText] = useState("");
@@ -53,7 +53,7 @@ const Todo = () => {
     <Center h="100vh">
       <Box h="60vh">
         <VStack spacing="4" w="400px">
-          <Heading>My Todo App</Heading>
+          <Heading>Todo App</Heading>
           <Divider />
           <TodoForm
             onSubmit={editing ? handleUpdate : handleAddTodo}
@@ -61,18 +61,13 @@ const Todo = () => {
             onTaskTextChange={setTaskText}
             buttonText={editing ? "Update" : "Submit"}
           />
-          {!editing && todos.length !== 0 && (
-            <VStack spacing="4" w="40vw" h="60vh">
-              {todos.map((todo) => (
-                <TodoItem
-                  key={todo.id}
-                  todo={todo}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                  onComplete={handleComplete}
-                />
-              ))}
-            </VStack>
+          {!editing && (
+            <TodoList
+              todos={todos}
+              handleComplete={handleComplete}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+            />
           )}
         </VStack>
       </Box>
