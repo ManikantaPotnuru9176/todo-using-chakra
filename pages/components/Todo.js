@@ -1,37 +1,9 @@
 import React, { useState } from "react";
-import {
-  Heading,
-  Center,
-  Input,
-  VStack,
-  Divider,
-  Button,
-  HStack,
-  Card,
-  Text,
-  Spacer,
-  IconButton,
-  Box,
-} from "@chakra-ui/react";
+import { Heading, Center, VStack, Divider, Box } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { nanoid } from "nanoid";
-
-const TodoForm = ({ onSubmit, taskText, onTaskTextChange, buttonText }) => (
-  <form onSubmit={onSubmit}>
-    <HStack>
-      <Input
-        placeholder="Enter Todo"
-        focusBorderColor="teal.400"
-        w="300px"
-        value={taskText}
-        onChange={(e) => onTaskTextChange(e.target.value)}
-      />
-      <Button colorScheme="teal" size="md" onClick={onSubmit}>
-        {buttonText}
-      </Button>
-    </HStack>
-  </form>
-);
+import TodoForm from "@/components/TodoForm";
+import TodoItem from "@/components/TodoItem";
 
 const Todo = () => {
   const [taskText, setTaskText] = useState("");
@@ -85,30 +57,12 @@ const Todo = () => {
           {!editing && (
             <VStack spacing="4" w="40vw" h="60vh">
               {todos.map((todo) => (
-                <Card key={todo.id} padding="20px" w="30vw">
-                  <HStack>
-                    <Text w="20vw">{todo.task}</Text>
-                    <Spacer />
-                    <IconButton
-                      isRound={true}
-                      variant="solid"
-                      colorScheme="teal"
-                      aria-label="Edit"
-                      fontSize="20px"
-                      icon={<EditIcon />}
-                      onClick={() => handleEdit(todo)}
-                    />
-                    <IconButton
-                      isRound={true}
-                      variant="solid"
-                      colorScheme="red"
-                      aria-label="Delete"
-                      fontSize="20px"
-                      icon={<DeleteIcon />}
-                      onClick={() => handleDelete(todo.id)}
-                    />
-                  </HStack>
-                </Card>
+                <TodoItem
+                  key={todo.id}
+                  todo={todo}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
               ))}
             </VStack>
           )}
