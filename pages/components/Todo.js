@@ -6,7 +6,7 @@ import TodoList from "@/components/TodoList";
 
 const Todo = () => {
   const [taskText, setTaskText] = useState("");
-  const [editing, setEditing] = useState(null);
+  const [editing, setEditing] = useState({ status: false, id: null });
 
   const [todos, setTodos] = useState([]);
 
@@ -25,7 +25,7 @@ const Todo = () => {
 
   const handleEdit = ({ id, task }) => {
     setTaskText(task);
-    setEditing(id);
+    setEditing({ status: true, id: id });
   };
 
   const handleUpdate = (event) => {
@@ -33,11 +33,11 @@ const Todo = () => {
     if (taskText.trim() !== "") {
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
-          todo.id === editing ? { ...todo, task: taskText } : todo
+          todo.id === editing.id ? { ...todo, task: taskText } : todo
         )
       );
       setTaskText("");
-      setEditing(null);
+      setEditing({ status: false, id: null });
     }
   };
 
@@ -56,12 +56,12 @@ const Todo = () => {
           <Heading>Todo App</Heading>
           <Divider />
           <TodoForm
-            onSubmit={editing ? handleUpdate : handleAddTodo}
+            onSubmit={editing.status ? handleUpdate : handleAddTodo}
             taskText={taskText}
             onTaskTextChange={setTaskText}
-            buttonText={editing ? "Update" : "Submit"}
+            buttonText={editing.status ? "Update" : "Submit"}
           />
-          {!editing && (
+          {!editing.status && (
             <TodoList
               todos={todos}
               handleComplete={handleComplete}
