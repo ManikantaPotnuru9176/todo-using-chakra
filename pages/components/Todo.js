@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Heading, Center, VStack, Divider, Box } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { nanoid } from "nanoid";
 import TodoForm from "@/components/TodoForm";
 import TodoItem from "@/components/TodoItem";
