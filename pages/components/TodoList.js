@@ -14,13 +14,14 @@ const TodoList = ({ todos, handleComplete, handleEdit, handleDelete }) => {
     <VStack spacing="4" w="40vw" h="60vh">
       {todos &&
         todos.map((todo) => (
-          <Card key={todo.id} padding="20px" w="400px">
+          <Card
+            key={todo.id}
+            padding="20px"
+            w="400px"
+            onClick={() => handleComplete(todo.id)}
+          >
             <HStack>
-              <Text
-                w="250px"
-                as={todo.complete ? "s" : "p"}
-                onClick={() => handleComplete(todo.id)}
-              >
+              <Text w="250px" as={todo.complete ? "s" : "p"}>
                 {todo.task}
               </Text>
               <Spacer />
@@ -31,7 +32,11 @@ const TodoList = ({ todos, handleComplete, handleEdit, handleDelete }) => {
                 aria-label="Edit"
                 fontSize="20px"
                 icon={<EditIcon />}
-                onClick={() => handleEdit(todo)}
+                onClick={(e) => {
+                  console.log(e);
+                  e.stopPropagation();
+                  handleEdit(todo);
+                }}
               />
               <IconButton
                 isRound={true}
@@ -40,7 +45,10 @@ const TodoList = ({ todos, handleComplete, handleEdit, handleDelete }) => {
                 aria-label="Delete"
                 fontSize="20px"
                 icon={<DeleteIcon />}
-                onClick={() => handleDelete(todo.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDelete(todo.id);
+                }}
               />
             </HStack>
           </Card>
