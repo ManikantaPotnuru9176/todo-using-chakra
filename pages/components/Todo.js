@@ -7,17 +7,16 @@ import TodoList from "@/components/TodoList";
 const Todo = () => {
   const [taskText, setTaskText] = useState("");
   const [editing, setEditing] = useState({ status: false, id: null });
-
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    todos.length !== 0 && setTodos(todos);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
-
-  useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem("todos"));
-    todos && setTodos(todos);
-  }, []);
 
   const handleAddTodo = (event) => {
     event.preventDefault();
