@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Heading, Center, VStack, Divider, Box } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 import TodoForm from "@/components/TodoForm";
@@ -9,6 +9,15 @@ const Todo = () => {
   const [editing, setEditing] = useState({ status: false, id: null });
 
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    todos && setTodos(todos);
+  }, []);
 
   const handleAddTodo = (event) => {
     event.preventDefault();
